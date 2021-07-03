@@ -35,12 +35,12 @@ export default function App() {
     ]);
     const fonts = cacheFonts([Ionicons.font]);
     return Promise.all([...images, ...fonts]);
-    
+    //여기서 console.log해서 image를 보면 promise가 두번 찍힌다.
   };
   const onFinish = () => setIsReady(true);
   return isReady ? (
     <View>
-      <Text>Ready!</Text>
+      <Text>  Ready!    </Text>
     </View>
   ) : (
     <AppLoading
