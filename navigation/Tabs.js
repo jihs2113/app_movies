@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import Movies from "../screens/Movies";
+import Movies from "../screens/Movies/MoviesContainer";
 import Tv from "../screens/Tv";
 import Search from "../screens/Search";
 import Favs from "../screens/Favs";
@@ -11,6 +11,7 @@ const Tabs = createBottomTabNavigator();
 
 const getHeaderName = route =>
  route?.state?.routeNames[route.state.index] || "Movies";
+ //index값이 undefined라면 movies를 칭해준다.
 
 export default ({navigation, route}) => {
 //   useLayoutEffect(() => {
@@ -32,6 +33,7 @@ export default ({navigation, route}) => {
       navigation.setOptions({
         //setOptions가 주는부분이 제일 generic(강력히) 적용된다.
         title: getHeaderName(route)
+        //title index값이 undefined라면 or movies로 movies를 칭해준다.
       });
     }, [route]);
 
@@ -40,7 +42,7 @@ export default ({navigation, route}) => {
     screenOptions={({ route }) => ({
       //즉시 object를 return하는 방법
       tabBarIcon: ({ focused }) => {
-        //이 함수는 Reac,Node를 return해준다.
+        //이 함수는 ReactNode를 return해준다.
         //focused는 true 이거나 false이다.
         let iconName = Platform.OS === "ios" ? "ios-" : "md-";
         if(route.name === "Movies"){
@@ -49,7 +51,7 @@ export default ({navigation, route}) => {
           iconName += "tv";
         }else if(route.name === "Search"){
           iconName += "search";
-        }else if(route.name === "Favorite"){
+        }else if(route.name === "Discover"){
           iconName += "heart";
         }
         return(
@@ -73,7 +75,7 @@ export default ({navigation, route}) => {
     <Tabs.Screen name="Movies" component={Movies} />
     <Tabs.Screen name="Tv" component={Tv} />
     <Tabs.Screen name="Search" component={Search} />
-    <Tabs.Screen name="Favorite" component={Favs} />
+    <Tabs.Screen name="Discover" component={Favs} />
   </Tabs.Navigator>
   )
 }
