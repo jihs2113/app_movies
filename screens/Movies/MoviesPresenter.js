@@ -5,6 +5,8 @@ import { Dimensions, ActivityIndicator, ScrollView, Slider, View  } from "react-
 import Slide from "../../components/Movies/slide";
 import Title from "../../components/Title";
 import Vertical from "../../components/Vertical";
+import Horizontal from "../../components/Horizontal";
+
 
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
@@ -15,22 +17,23 @@ const Container = styled.View`
 
 
 const SliderContainer = styled.View`
-  width: ${WIDTH}px;
+   width: 100%;
   height: ${HEIGHT / 4}px;
   margin-bottom: 40px;
 `;
 
+const UpcomingContainer = styled.View`
+  margin-top: 20px;
+`;
 
-export default ({ loading, nowPlaying, popular }) => (
+
+export default ({ loading, nowPlaying, popular, upcoming }) => (
   <ScrollView
-        style={{
-          backgroundColor: "black"
-        }}
-        contentContainerStyle={{
-          flex: 1,
-          justifyContent: loading ? "center" : "flex-start"
-        }}
-      >
+      style={{ backgroundColor: "black" }}
+      contentContainerStyle={{
+        justifyContent: loading ? "center" : "flex-start"
+      }}
+    >
     {loading ? (
       <ActivityIndicator color="white" size="small" />
     ) : (
@@ -53,16 +56,35 @@ export default ({ loading, nowPlaying, popular }) => (
         </SliderContainer>
         <Container>
           <Title title={"Popular Movies"} />
-          <ScrollView horizontal>
-              {popular.map(movie => (
-                <Vertical
-                  key={movie.id}
-                  poster={movie.poster_path}
-                  title={movie.original_title}
-                  votes={movie.vote_average}
-                />
-              ))}
+          <ScrollView
+            style={{ marginTop: 20, marginBottom: 40 }}
+            contentContainerStyle={{ paddingLeft: 30 }}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            {popular.map(movie => (
+              <Vertical
+                id={movie.id}
+                key={movie.id}
+                poster={movie.poster_path}
+                title={movie.title}
+                votes={movie.vote_average}
+              />
+            ))}
           </ScrollView>
+          <Title title={"Coming Soon"}></Title>
+          <UpcomingContainer>
+            {upcoming.map(movie => (
+              <Horizontal
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                releaseDate={movie.release_date}
+                poster={movie.poster_path}
+                overview={movie.overview}
+              />
+            ))}
+          </UpcomingContainer>
         </Container>
       </>
     )}
