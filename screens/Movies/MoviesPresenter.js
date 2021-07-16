@@ -8,36 +8,31 @@ import Vertical from "../../components/Vertical";
 import Horizontal from "../../components/Horizontal";
 
 
-
 const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
-const Container = styled.View`
-
-`;
-
-
 const SliderContainer = styled.View`
-   width: 100%;
+  width: 100%;
   height: ${HEIGHT / 4}px;
   margin-bottom: 40px;
 `;
+
+const Container = styled.View``;
 
 const UpcomingContainer = styled.View`
   margin-top: 20px;
 `;
 
-
 export default ({ loading, nowPlaying, popular, upcoming }) => (
   <ScrollView
-      style={{ backgroundColor: "black" }}
-      contentContainerStyle={{
-        justifyContent: loading ? "center" : "flex-start"
-      }}
-    >
+    style={{ backgroundColor: "black" }}
+    contentContainerStyle={{
+      flex: loading ? 1 : "auto",
+      justifyContent: loading ? "center" : "flex-start"
+    }}
+  >
     {loading ? (
       <ActivityIndicator color="white" size="small" />
     ) : (
-      
       <>
         <SliderContainer>
           <Swiper controlsEnabled={false} loop timeout={3}>
