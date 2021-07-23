@@ -11,7 +11,7 @@ export default () => {
   //    //nowplaying이 movies를 default하는 array를 가진다.
   //   error: null
   // });
-    
+  const [refreshing, setRefresing] = useState(false);
   const [movies, setMovies] = useState({
       //array로 정의해준다.
       loading: true,
@@ -60,7 +60,7 @@ export default () => {
     getData();
   }, []);
 
-  return <MoviesPresenter {...movies} />;
+  return <MoviesPresenter refreshFn={getData} {...movies} />;
     // <View style={{ flex: 1, backgroundColor: "black" }}>
     //   <Text style={{ color: "white" }}>{movies.nowPlaying?.length}</Text>
     //    {/* <Button title="Movie" onPress={() => navigation.navigate("Detail")} /> */}
