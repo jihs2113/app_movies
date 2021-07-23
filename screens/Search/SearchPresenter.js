@@ -2,25 +2,25 @@ import React from "react";
 import styled from "styled-components/native";
 import Input from "../../components/Search/Input";
 import HorizontalSlider from "../../components/HorizontalSlider";
-import Horizontal from "../../components/Horizontal";
 import Vertical from "../../components/Vertical";
+import ScrollContainer from "../../components/ScrollContainer";
 
 const Container = styled.ScrollView`
   background-color: black;
 `;
 
 export default ({ movies, shows, keyword, onChange, onSubmit }) => (
-  <Container
+  <ScrollContainer
     contentContainerStyle={{
       paddingTop: 10
     }}
-    >
+  >
     <Input
       placeholder={"Write a keyword"}
       value={keyword}
       onChange={onChange}
       onSubmit={onSubmit}
-      />
+    />
     {movies.length !== 0 && (
       <HorizontalSlider title={"Movie Results"}>
         {movies.map(movie => (
@@ -47,5 +47,5 @@ export default ({ movies, shows, keyword, onChange, onSubmit }) => (
         ))}
       </HorizontalSlider>
     )}
-  </Container>
+  </ScrollContainer>
 );
