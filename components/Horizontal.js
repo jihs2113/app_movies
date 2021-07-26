@@ -7,7 +7,6 @@ import Votes from "./Votes";
 import { apiImage } from "../api";
 import { trimText, formatDate } from "../utils";
 import { useNavigation } from "@react-navigation/native";
-
 const Container = styled.View`
   padding: 0px 30px;
   margin-bottom: 30px;
@@ -35,11 +34,18 @@ const Overview = styled.Text`
   opacity: 0.8;
 `;
 
-
-const Horizontal = ({ id, title, poster, overview, releaseDate }) => {
+const Horizontal = ({
+  isTv = false,
+  id,
+  title,
+  poster,
+  overview,
+  releaseDate
+}) => {
   const navigation = useNavigation();
   const goToDetai = () => {
     navigation.navigate("Detail", {
+      isTv,
       id,
       title,
       poster,
@@ -62,7 +68,6 @@ const Horizontal = ({ id, title, poster, overview, releaseDate }) => {
     </TouchableOpacity>
   );
 };
-
 Horizontal.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
