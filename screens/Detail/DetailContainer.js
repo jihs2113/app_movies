@@ -9,28 +9,32 @@ export default ({
   }
 }) => {
   const [loading, setLoading] = useState(true);
-  const [movie, setMovie] = useState({
-    title,
-    backgroundImage,
-    poster,
-    overview,
-    votes
+  const [detail, setDetail] = useState({
+    loading: true,
+    result: {
+      title,
+      backgroundImage,
+      poster,
+      overview,
+      votes
+    }
   });
   const getData = async () => {
-    if (isTv) {
-      //tv컴포넌트에서 vertical과 horizontal로 받아온 prop으로
-      //조건을 넣어 tv인지 아닌지를 구별해준다.
-      const [getMovie, getMovieError] = await tvApi.show(id);
-    } else {
-      const [getMovie, getMovieError] = await movieApi.movie(id);
-    }
-    setMovie({
-      ...getMovie,
-      title: getMovie.title,
-      backgroundImage: getMovie.backdrop_path,
-      poster: getMovie.poster_path,
-      overview: getMovie.overview,
-      votes: getMovie.vote_average
+       //tv컴포넌트에서 vertical과 horizontal로 받아온 prop으로
+      // tv인지 아닌지를 구별해준다.
+    const [getDetail, getDetailError] = isTv
+      ? await tvApi.show(id)
+      : await movieApi.movie(id);
+    setDetail({
+      loading: false,
+      result: {
+        ...getDetail,
+        title: getDetail.title || getDetail.name,
+        backgroundImage: getDetail.backdrop_path,
+        poster: getDetail.poster_path,
+        overview: getDetail.overview,
+        votes: getDetail.vote_average
+      }
     });
   };
 
@@ -40,5 +44,5 @@ export default ({
   React.useLayoutEffect(() => {
     navigation.setOptions({ title });
   });
-  return <DetailPresenter movie={movie} loading={loading} />;
+  return <DetailPresenter {...detail} />;
 };

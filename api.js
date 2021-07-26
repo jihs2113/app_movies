@@ -34,7 +34,7 @@ export const movieApi = {
   //지역
   search: query => getAnything("/search/movie", { query }),
   //단어에 따라서
-  movie: id => getAnything(`/movie/${id}`),
+  movie: id => getAnything(`/movie/${id}`, { append_to_response: "videos" }),
    //id에 따라서
   discover: () => getAnything("/discover/movie")
   //여기있는 리스트들은 전부 results를 가진다.
@@ -45,7 +45,7 @@ export const tvApi = {
   topRated: () => getAnything("/tv/top_rated"),
   popular: () => getAnything("/tv/popular"),
   search: query => getAnything("/search/tv", { query }),
-  show: id => getAnything(`/tv/${id}`)
+  show: id => getAnything(`/tv/${id}`, { append_to_response: "videos" })
 };
 
 export const apiImage = (
