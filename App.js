@@ -4,7 +4,7 @@ import * as Font from "expo-font";
 import { Image, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Asset } from "expo-asset";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import Stack from "./navigation/Stack";
 const cacheImages = images =>
   images.map(image => {
@@ -32,7 +32,7 @@ export default function App() {
       require("./assets/splash.png")
        //require부분이 module이다.
     ]);
-    const fonts = cacheFonts([Ionicons.font]);
+    const fonts = cacheFonts([Ionicons.font, FontAwesome.font]);
     //Ionicons의 폰트를 미리 로드한다.
     return Promise.all([...images, ...fonts]);
     //loadAssets은 promise를 return 해줘야한다.

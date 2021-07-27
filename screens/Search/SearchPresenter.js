@@ -4,8 +4,6 @@ import Input from "../../components/Search/Input";
 import HorizontalSlider from "../../components/HorizontalSlider";
 import Vertical from "../../components/Vertical";
 import ScrollContainer from "../../components/ScrollContainer";
-
-
 export default ({ movies, shows, keyword, onChange, onSubmit }) => (
   <ScrollContainer
     refreshFn={onSubmit}
@@ -37,6 +35,7 @@ export default ({ movies, shows, keyword, onChange, onSubmit }) => (
       <HorizontalSlider title={"TV Results"}>
         {shows.map(show => (
           <Vertical
+            isTv={true}
             key={show.id}
             id={show.id}
             votes={show.vote_average}
