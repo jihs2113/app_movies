@@ -1,7 +1,6 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { useEffect, useState } from "react/cjs/react.development";
-import { movieApi } from "../api";
+import React, { useState, useEffect } from "react";
+import FavsPresenter from "./FavsPresenter";
+import { movieApi } from "../../api";
 
 export default () => {
   const [movies, setMovies] = useState({
@@ -18,9 +17,6 @@ export default () => {
   useEffect(() => {
     getData();
   }, []);
-  return (
-    <View>
-      <Text>{movies.results.length}</Text>
-    </View>
-  );
+  
+  return <FavsPresenter {...movies} />;
 };
